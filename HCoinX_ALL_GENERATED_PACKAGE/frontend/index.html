@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HCoinX Platform</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+<h1>HCoinX Slot Machine</h1>
+<button onclick="connect()">Connect Wallet</button>
+<button onclick="spin()">Spin (10 HCX)</button>
+<p id="status"></p>
+<script>
+let web3, account, contract;
+const CONTRACT = "PASTE_SLOT_CONTRACT_ADDRESS";
+const ABI = [{"inputs":[],"name":"spin","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+async function connect(){
+  web3 = new Web3(window.ethereum);
+  await ethereum.request({method:'eth_requestAccounts'});
+  account = (await web3.eth.getAccounts())[0];
+  contract = new web3.eth.Contract(ABI, CONTRACT);
+}
+
+async function spin(){
+  await contract.methods.spin().send({from:account});
+  document.getElementById("status").innerText="Spin sent!";
+}
+</script>
+</body>
+</html>
