@@ -1,62 +1,48 @@
+#!/usr/bin/env python3
 """
-hcoinx-driving: Arrival Time Predictor
-Supports basic and extended features (time of day, day of week)
+hcoinx-driving Bus Arrival Time Predictor
+Linear regression model trained on 500 historical bus routes
+Generated: 2026-06-07T07:03:02.803717
+R² Score: 0.9260
 """
+
 import pandas as pd
+import numpy as np
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_absolute_error
-import json, sys, os
 
-csv_path = sys.argv[1] if len(sys.argv) > 1 else "bus_history_large.csv"
+class BusPredictor:
+    def __init__(self):
+        # Model coefficients (auto-generated on 2026-06-07 07:03)
+        self.intercept = 2.0389
+        self.coefficients = {
+            'distance': 3.2954,
+            'traffic': 0.5032,
+            'time_of_day': 0.0589,
+            'day_of_week': -0.9176,
+        }
 
-if not os.path.exists(csv_path):
-    print(json.dumps({"error": f"File not found: {csv_path}"}))
-    sys.exit(1)
+    def predict(self, distance, traffic, time_of_day, day_of_week):
+        """
+        Predict bus arrival time in minutes.
+        
+        Args:
+            distance (float): Distance in km
+            traffic (int): Traffic level 1-10
+            time_of_day (int): Hour 0-23
+            day_of_week (int): Day 0-6 (Mon-Sun)
+        
+        Returns:
+            float: Estimated arrival time in minutes
+        """
+        result = (self.intercept +
+                  self.coefficients['distance'] * distance +
+                  self.coefficients['traffic'] * traffic +
+                  self.coefficients['time_of_day'] * time_of_day +
+                  self.coefficients['day_of_week'] * day_of_week)
+        return max(1.0, round(result, 1))
 
-data = pd.read_csv(csv_path)
-
-# Use extended features if available
-if 'time_of_day' in data.columns and 'day_of_week' in data.columns:
-    features = ['distance', 'traffic', 'time_of_day', 'day_of_week']
-else:
-    features = ['distance', 'traffic']
-
-X = data[features]
-y = data['arrival_minutes']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-r2 = round(r2_score(y_test, y_pred), 4)
-mae = round(mean_absolute_error(y_test, y_pred), 4)
-
-result = {
-    "status": "model trained",
-    "samples": len(data),
-    "features": features,
-    "r2_score": r2,
-    "mae_minutes": mae,
-    "coefficients": {f: round(c, 4) for f, c in zip(features, model.coef_)},
-    "intercept": round(model.intercept_, 4)
-}
-
-# Example predictions
-examples = [
-    {"distance": 2.0, "traffic": 3, "time_of_day": 9, "day_of_week": 1},
-    {"distance": 5.0, "traffic": 7, "time_of_day": 8, "day_of_week": 0},
-    {"distance": 10.0, "traffic": 9, "time_of_day": 18, "day_of_week": 2},
-]
-
-predictions = []
-for ex in examples:
-    vals = [ex[f] for f in features]
-    pred = round(model.predict([vals])[0], 1)
-    ex["predicted_arrival_minutes"] = pred
-    predictions.append(ex)
-
-result["example_predictions"] = predictions
-print(json.dumps(result, indent=2))
+if __name__ == "__main__":
+    predictor = BusPredictor()
+    # Example: 5km distance, traffic level 7, 8am, Monday
+    eta = predictor.predict(5.0, 7, 8, 0)
+    print(f"Example prediction: 5km, traffic 7, 8am Monday = {eta} minutes")
