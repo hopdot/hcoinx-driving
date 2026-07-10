@@ -1,12 +1,9 @@
 {
-  "intercept": -0.12936394357689096,
-  "coefficients": {
-    "distance": 3.1919517422518724,
-    "traffic": 0.5431447243302261,
-    "time_of_day": -0.00872193467780302,
-    "day_of_week": -0.004640253559180881
-  },
-  "r2_score": 0.9915784982096256,
-  "trained_at": "2026-06-13T07:02:42.802616",
-  "records": 100
+  "status": "model trained",
+  "samples": 100,
+  "coef_distance": 3.1894,
+  "coef_traffic": 0.5435,
+  "intercept": -0.2305,
+  "last_updated": "2026-07-10 07:03:29 UTC",
+  "training_date": "2026-07-10"
 }
