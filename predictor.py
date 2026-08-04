@@ -6,6 +6,7 @@ import os
 
 csv_path = sys.argv[1] if len(sys.argv) > 1 else "bus_history_large.csv"
 # Training source: bus_history_large.csv
+# Retrained from bus_history_large.csv: 2026-08-04 UTC; samples=100; r_squared=0.9916; coef_distance=3.1894; coef_traffic=0.5435; intercept=-0.2305
 
 if not os.path.exists(csv_path):
     print(json.dumps({"error": f"CSV file not found: {csv_path}"}))
