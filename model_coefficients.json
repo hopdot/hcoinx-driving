@@ -5,6 +5,7 @@
   "coef_traffic": 0.5435,
   "intercept": -0.2305,
   "r2_score": 0.9915609020891046,
-  "last_updated": "2026-11-18 01:49:28 UTC",
+  "rmse_minutes": 1.2379,
+  "last_updated": "2026-11-18 07:09:18 UTC",
   "training_date": "2026-11-18"
 }
