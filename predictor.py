@@ -1,17 +1,17 @@
 """
 hcoinx-driving: Bus Arrival Predictor
-Trained on 100 records | R² = 0.9916
-Last retrain: 2026-11-20T07:06:14.913474+00:00
+Trained on 500 records | R² = 0.9171
+Last retrain: 2026-11-20T07:14:13.090717+00:00
 """
 
 class BusPredictor:
     def __init__(self):
-        self.intercept = -0.2305
+        self.intercept = -0.1064
         self.coef = {
-            'distance': 3.1894,
-            'traffic': 0.5435,
+            'distance': 3.3017,
+            'traffic': 0.5087,
         }
-        self.r2_score = 0.9916
+        self.r2_score = 0.9171
 
     def predict(self, distance, traffic):
         """Estimate ETA in minutes."""

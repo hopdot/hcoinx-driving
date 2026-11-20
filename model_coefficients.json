@@ -1,11 +1,12 @@
 {
   "status": "model trained",
-  "samples": 100,
-  "coef_distance": 3.1894,
-  "coef_traffic": 0.5435,
-  "intercept": -0.2305,
-  "r2_score": 0.9915609020891046,
-  "rmse_minutes": 1.2379,
-  "last_updated": "2026-11-20 07:06:14 UTC",
-  "training_date": "2026-11-20"
+  "samples": 500,
+  "coef_distance": 3.3017,
+  "coef_traffic": 0.5087,
+  "intercept": -0.1064,
+  "r2_score": 0.917119,
+  "rmse_minutes": 5.5128,
+  "last_updated": "2026-11-20 07:14:13 UTC",
+  "training_date": "2026-11-20",
+  "dataset": "bus_history_large.csv (500 rows, regenerated from generate_data.py)"
 }
