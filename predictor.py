@@ -1,7 +1,7 @@
 """
 hcoinx-driving: Bus Arrival Predictor
 Trained on 500 records | R² = 0.9171
-Last retrain: 2026-11-20T07:14:13.090717+00:00
+Last retrain: 2026-11-21T07:07:03.909152+00:00
 """
 
 class BusPredictor:

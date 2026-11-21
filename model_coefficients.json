@@ -6,7 +6,7 @@
   "intercept": -0.1064,
   "r2_score": 0.917119,
   "rmse_minutes": 5.5128,
-  "last_updated": "2026-11-20 07:14:13 UTC",
-  "training_date": "2026-11-20",
-  "dataset": "bus_history_large.csv (500 rows, regenerated from generate_data.py)"
+  "last_updated": "2026-11-21 07:07:03 UTC",
+  "training_date": "2026-11-21",
+  "dataset": "bus_history_large.csv (500 rows)"
 }
